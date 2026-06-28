@@ -7,16 +7,12 @@ export default function Conversations() {
   const [inputMsg, setInputMsg] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState(activeChat.messages);
-  const [showList, setShowList] = useState(false); // for mobile view toggle
+  const [showList, setShowList] = useState(true); // Always show list first on mobile
 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     setMessages(activeChat.messages);
-    // On mobile, hide list when a chat is selected
-    if (window.innerWidth <= 900) {
-      setShowList(false);
-    }
   }, [activeChat]);
 
   const scrollToBottom = () => {
@@ -62,7 +58,12 @@ export default function Conversations() {
             <div
               key={convo.id}
               className={`chat-item ${activeChat?.id === convo.id ? 'active' : ''}`}
-              onClick={() => setActiveChat(convo)}
+              onClick={() => {
+                setActiveChat(convo);
+                if (window.innerWidth <= 900) {
+                  setShowList(false); // Hide list to show chat on mobile
+                }
+              }}
             >
               <div className="chat-avatar">
                 {convo.avatar}

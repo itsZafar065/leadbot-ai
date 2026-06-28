@@ -14,6 +14,7 @@
   gap: 16px;
   padding: 24px;
   overflow: hidden;
+  min-height: 0;
 }
 
 .chat-list-title {
@@ -153,6 +154,7 @@
   flex-direction: column;
   overflow: hidden;
   padding: 0;
+  min-height: 0;
 }
 
 .chat-header {
