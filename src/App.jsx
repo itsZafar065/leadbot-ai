@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 import Dashboard from './pages/Dashboard';
@@ -9,18 +9,25 @@ import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
 import './App.css';
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      {/* Animated Blobs */}
-      <div className="blob blob-1"></div>
-      <div className="blob blob-2"></div>
-      <div className="blob blob-3"></div>
+function AppContent() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    closeSidebar();
+  }, [location]);
+
+  return (
+    <>
       <div className="app-container">
-        <Sidebar />
+        <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+        {isSidebarOpen && <div className="sidebar-overlay fade-in" onClick={closeSidebar}></div>}
         <main className="main-content">
-          <Topbar />
+          <Topbar toggleSidebar={toggleSidebar} />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/conversations" element={<Conversations />} />
@@ -30,6 +37,18 @@ export default function App() {
           </Routes>
         </main>
       </div>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      {/* Animated Blobs */}
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
+      <AppContent />
     </BrowserRouter>
   );
 }

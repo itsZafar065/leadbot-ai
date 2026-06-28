@@ -1,12 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, closeSidebar }) {
   return (
-    <aside className="sidebar glass-panel">
+    <aside className={`sidebar glass-panel ${isOpen ? 'open' : ''}`}>
       <div className="logo">
-        <i className='bx bxs-bot'></i>
-        <span>LeadBot <span className="highlight">AI</span></span>
+        <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+            <i className='bx bxs-bot'></i>
+            <span>LeadBot <span className="highlight">AI</span></span>
+        </div>
+        <button className="mobile-close-btn" onClick={closeSidebar}>
+            <i className='bx bx-x'></i>
+        </button>
       </div>
       <nav className="nav-menu">
         <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} end>

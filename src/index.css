@@ -396,7 +396,8 @@ body {
 
 .table-container {
     padding: 0;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .leads-table {
@@ -477,39 +478,83 @@ body {
     }
 }
 
-/* Responsive */
+/* Responsive Sidebar & App */
 .mobile-menu-btn {
     display: none;
+}
+
+.mobile-close-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
 }
 
 @media (max-width: 900px) {
     .app-container {
         padding: 12px;
         flex-direction: column;
+        overflow: hidden;
     }
     
     .sidebar {
-        width: 100%;
-        padding: 16px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: -320px; /* Hidden by default */
+        height: 100vh;
+        width: 300px;
+        z-index: 1000;
+        background: rgba(15, 12, 41, 0.95);
+        border-radius: 0 20px 20px 0;
+        padding: 24px;
+        transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
-    .logo { margin-bottom: 0; }
-    
-    .nav-menu {
-        display: none; /* In real app, toggle this or show as bottom sheet */
-    }
-    
-    .upgrade-card { display: none; }
-    
-    .mobile-menu-btn {
-        display: block;
-        font-size: 24px;
+    .sidebar.open {
+        left: 0;
     }
 
-    .search-bar { width: 100%; }
-    .header { flex-direction: column; align-items: stretch; gap: 16px; }
-    .user-profile { justify-content: space-between; }
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+    }
+    
+    .logo { 
+        justify-content: space-between; 
+        margin-bottom: 32px;
+    }
+    
+    .mobile-close-btn { display: block; }
+    
+    .nav-menu { display: flex; }
+    
+    .upgrade-card { display: block; }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .search-bar { display: none; }
+    
+    .header { padding-top: 8px; }
 }

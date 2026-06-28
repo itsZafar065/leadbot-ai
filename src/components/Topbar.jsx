@@ -1,12 +1,17 @@
 import React from 'react';
 import './Topbar.css';
 
-export default function Topbar({ title }) {
+export default function Topbar({ toggleSidebar }) {
   return (
     <header className="header">
-      <div className="search-bar glass-panel">
-        <i className='bx bx-search'></i>
-        <input type="text" placeholder="Search conversations, leads..." />
+      <div className="header-left">
+        <button className="mobile-menu-btn icon-btn glass-panel" onClick={toggleSidebar}>
+          <i className='bx bx-menu'></i>
+        </button>
+        <div className="search-bar glass-panel">
+          <i className='bx bx-search'></i>
+          <input type="text" placeholder="Search conversations, leads..." />
+        </div>
       </div>
       <div className="user-profile">
         <button className="icon-btn glass-panel">
