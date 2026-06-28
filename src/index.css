@@ -18,26 +18,32 @@
     --bg-dark: #0f0c29;
 }
 
-* {
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Stop all page-level scrolling and bouncing! */
+    position: relative;
 }
 
 body {
     font-family: 'Outfit', sans-serif;
     background: var(--bg-dark);
     color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    overflow-x: hidden;
-    position: relative;
+    line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(112, 0, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(0, 230, 118, 0.08) 0%, transparent 50%);
+    background-attachment: fixed;
 }
 
 #root {
     width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Background Blobs */
@@ -94,10 +100,11 @@ body {
 .app-container {
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 24px;
     gap: 24px;
     z-index: 1;
+    overflow: hidden;
 }
 
 /* Sidebar */
@@ -210,8 +217,11 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll in content */
     padding-right: 12px;
     gap: 32px;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    height: 100%;
 }
 
 .main-content::-webkit-scrollbar {
@@ -508,14 +518,15 @@ body {
     .app-container {
         padding: 12px;
         flex-direction: column;
-        overflow: hidden;
+        height: 100%;
+        overflow: hidden; /* Ensure container itself doesn't scroll */
     }
     
     .sidebar {
         position: fixed;
         top: 0;
         left: -320px; /* Hidden by default */
-        height: 100vh;
+        height: 100%;
         width: 300px;
         max-width: 85vw; /* Ensure it doesn't overflow mobile screen */
         z-index: 1000;
