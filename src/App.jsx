@@ -7,6 +7,7 @@ import Conversations from './pages/Conversations';
 import Leads from './pages/Leads';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
+import Pricing from './pages/Pricing';
 import './App.css';
 
 function AppContent() {
@@ -34,6 +35,7 @@ function AppContent() {
             <Route path="/leads" element={<Leads />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </main>
       </div>

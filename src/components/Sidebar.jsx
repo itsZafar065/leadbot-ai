@@ -1,7 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Sidebar({ isOpen, closeSidebar }) {
+  const navigate = useNavigate();
+
   return (
     <aside className={`sidebar glass-panel ${isOpen ? 'open' : ''}`}>
       <div className="logo">
@@ -39,7 +41,10 @@ export default function Sidebar({ isOpen, closeSidebar }) {
         <i className='bx bxs-rocket'></i>
         <h4>Upgrade to Pro</h4>
         <p>Get unlimited AI responses and premium features.</p>
-        <button className="btn-primary">Upgrade</button>
+        <button className="btn-primary" onClick={() => {
+          navigate('/pricing');
+          closeSidebar();
+        }}>Upgrade</button>
       </div>
     </aside>
   );
